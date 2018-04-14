@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
+import { withRouter } from 'react-router-dom'
 import ApiManager from 'utils/ApiManager'
 import Debounce from 'utils/Debounce'
+import qs from 'query-string'
+import MovieSuggestion from '../MovieSuggestion/MovieSuggestion'
+import './MovieAutoComplete.css'
 
 class MovieAutoComplete extends PureComponent {
   constructor(){
@@ -20,16 +24,23 @@ class MovieAutoComplete extends PureComponent {
           onChange={this.onChange}
         />
         <div className="suggestions">
-          <ul>
           {
             suggestions.map(suggestion => (
-              <li key={suggestion.id}>{suggestion.title} ({suggestion.year})</li>
+              <MovieSuggestion
+                key={suggestion.id}
+                movie={suggestion}
+                viewMovie={this.viewMovie}
+              />
             ))
           }
-          </ul>
         </div>
       </div>
     )
+  }
+  viewMovie = movie => {
+    const { history } = this.props
+    const urlParams = qs.stringify({ title: movie.title })
+    history.push(`/movie?${urlParams}`)
   }
   onChange = ({ target: { value: searchTerm } }) => {
     const { onChange } = this.props
@@ -50,4 +61,4 @@ class MovieAutoComplete extends PureComponent {
   }
 }
 
-export default MovieAutoComplete
+export default withRouter(MovieAutoComplete)

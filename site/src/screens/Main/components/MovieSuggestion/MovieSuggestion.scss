@@ -1,0 +1,30 @@
+.movie-suggestion {
+  display: flex;
+  width: 100%;
+  align-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  img {
+    max-height: 100px;
+  }
+  .movie-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    box-sizing: border-box;
+
+    .movie-title {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.movie-suggestion:first-of-type {
+  margin-top: 0;
+}
+.movie-suggestion:nth-of-type(n){
+  margin-bottom: 0;
+}

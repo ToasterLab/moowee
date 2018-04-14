@@ -1,5 +1,7 @@
 import rp from 'request-promise-native'
 
+require('dotenv').config()
+
 const API_KEY = process.env.OMDB_API_KEY
 const ENDPOINT = 'http://www.omdbapi.com/'
 
