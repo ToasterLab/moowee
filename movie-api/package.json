@@ -1,0 +1,45 @@
+{
+  "name": "movie-api",
+  "version": "1.0.0",
+  "description": "movie api",
+  "main": "dist/index.js",
+  "author": "Huey <huey@ketupat.me>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "deploy": "serverless deploy",
+    "invoke:local": "serverless invoke local -f",
+    "invoke:remote": "serverless invoke -f",
+    "logs": "serverless logs -f",
+    "build:dev": "webpack",
+    "build:prod": "webpack --config webpack.config.prod.js"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "cheerio": "^1.0.0-rc.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.16.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "serverless": "^1.26.0",
+    "serverless-google-cloudfunctions": "^1.1.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-node-externals": "^1.6.0"
+  }
+}
