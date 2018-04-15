@@ -1,0 +1,29 @@
+@import "styles/FontSizes.scss";
+
+.content-rating {
+  .appropriate-ages {
+    display: flex;
+    flex-direction: row;
+    .age {
+      flex: 1;
+      padding: 10px;
+      text-align:center;
+      flex-direction: column;
+
+      span, strong {
+        font-size: $font-size-big;
+      }
+    }
+  }
+
+  .one-liner, .description {
+    padding: 0 20px 0 20px;
+  }
+
+  .description {
+    p {
+      margin: 0;
+    }
+  }
+
+}

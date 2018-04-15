@@ -7,7 +7,7 @@ const AppRouter = () => (
   <Router>
     <div>
       <Route exact path="/" component={MainScreen} />
-      <Route path="/movie" component={DetailScreen} />
+      <Route path="/movie/:title/" component={DetailScreen} />
     </div>
   </Router>
 )

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import qs from 'query-string'
+import { Route, NavLink } from 'react-router-dom'
 import ApiManager from 'utils/ApiManager'
-import ItemList from './components/ItemList/ItemList'
-import Rating from './components/Rating/Rating'
-import Actors from './components/Actors/Actors'
+import MovieInfo from './scenes/MovieInfo/MovieInfo'
+import Actors from './scenes/Actors/Actors'
+import Reviews from './scenes/Reviews/Reviews'
+import ContentRating from './scenes/ContentRating/ContentRating'
 import './Detail.css'
 
 class DetailScreen extends Component {
-  constructor(){
+  constructor () {
     super()
     this.state = {
       rt: {
@@ -16,51 +17,57 @@ class DetailScreen extends Component {
         director: [],
         genre: [],
         aggregateRating: {},
+        review: []
+      },
+      csm: {
+        kidsSay: '',
+        age: '',
+        parentsSay: ''
       }
     }
   }
-  componentDidMount(){
-    const queryString = this.props.location.search
-    const { title } = qs.parse(queryString)
+  componentDidMount () {
+    const { title } = this.props.match.params
     this.setState({ movie: {
       ...this.state.movie,
       title
-    }})
+    } })
     this.fetchMovie(title)
   }
-  render(){
-    const { rt } = this.state
+  render () {
+    const { rt, csm } = this.state
+    const { match: { url: matchUrl } } = this.props
     return (
       <div className="detail-screen">
-        <div className="rotten-tomatoes">
-          <h1>{rt.title}</h1>
-          <img src={rt.image} alt={rt.title} />
-          <Rating
-            className="rating"
-            rating={rt.aggregateRating}
+        <div className="header">
+          <h1 className="movie-title">{rt.title}</h1>
+          <div className="tabs">
+            <NavLink exact to={`${matchUrl}`} activeClassName="active">INFO</NavLink>
+            <NavLink to={`${matchUrl}/actors/`} activeClassName="active">ACTORS</NavLink>
+            <NavLink to={`${matchUrl}/reviews/`} activeClassName="active">REVIEWS</NavLink>
+            <NavLink to={`${matchUrl}/content-rating/`} activeClassName="active">RATING</NavLink>
+          </div>
+        </div>
+        <div className="content">
+          <Route
+            exact
+            path="/movie/:title/"
+            render={props => <MovieInfo {...{ ...props, rt }} />}
           />
-          <Actors
-            actors={rt.actors}
+          <Route
+            exact
+            path="/movie/:title/actors"
+            render={props => <Actors {...{ ...props, actors: rt.actors }} />}
           />
-          <ItemList
-            className="genres"
-            label="Genres: "
-            items={rt.genre.map(genre => ({ name: genre }))}
+          <Route
+            exact
+            path="/movie/:title/reviews"
+            render={props => <Reviews {...{ ...props, reviews: rt.review }} />}
           />
-          <ItemList
-            className="authors"
-            label="Written By: "
-            items={rt.author}
-          />
-          <ItemList
-            className="directors"
-            label="Directed By: "
-            items={rt.director}
-          />
-          <ItemList
-            className="production-company"
-            label="Produced By: "
-            items={rt.productionCompany ? [ { name: rt.productionCompany } ] : []}
+          <Route
+            exact
+            path="/movie/:title/content-rating"
+            render={props => <ContentRating {...{ ...props, csm }} />}
           />
         </div>
       </div>
@@ -68,13 +75,18 @@ class DetailScreen extends Component {
   }
   fetchMovie = async title => {
     let rt = {}
+    let csm = {}
     try {
-      rt = await ApiManager.getRTInfo(title)
-    } catch(error){
+      [rt, csm] = await Promise.all([
+        ApiManager.getRTInfo(title),
+        ApiManager.getCSMInfo(title)
+      ])
+    } catch (error) {
+      window.alert('Could not fetch movie')
       console.error(error)
     }
-    console.log(rt)
-    this.setState({ rt })
+    console.log(csm)
+    this.setState({ rt, csm })
   }
 }
 

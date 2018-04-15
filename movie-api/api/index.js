@@ -5,7 +5,13 @@ import moowee from '../lib/moowee'
 
 const invalidTitle = title => !title || typeof title !== 'string' || title.length === 0
 
+const enableCORS = response => {
+  response.set('Access-Control-Allow-Origin', '*')
+  response.set('Access-Control-Allow-Methods', 'GET, POST')
+}
+
 export const CommonSenseMedia = (request, response) => {
+  enableCORS(response)
   const { title } = request.query
   if (invalidTitle(title)) {
     response.status(400).json({
@@ -30,6 +36,7 @@ export const CommonSenseMedia = (request, response) => {
 }
 
 export const RottenTomatoes = (request, response) => {
+  enableCORS(response)
   const { title } = request.query
   if (invalidTitle(title)) {
     response.status(400).json({
@@ -54,6 +61,7 @@ export const RottenTomatoes = (request, response) => {
 }
 
 export const OMDb = (request, response) => {
+  enableCORS(response)
   const { title } = request.query
   if (invalidTitle(title)) {
     response.status(400).json({
@@ -78,6 +86,7 @@ export const OMDb = (request, response) => {
 }
 
 export const Moowee = (request, response) => {
+  enableCORS(response)
   const { title } = request.query
   if (invalidTitle(title)) {
     response.status(400).json({

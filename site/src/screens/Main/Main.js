@@ -3,17 +3,17 @@ import MovieAutoComplete from './components/MovieAutoComplete/MovieAutoComplete'
 import './Main.css'
 
 class MainScreen extends Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       searchQuery: ''
     }
     this.movies = ['Shrek', 'The Incredibles', 'The Prestige', 'The King\'s Speech', 'Zootopia']
   }
-  render() {
+  render () {
     return (
       <div className="main-screen">
-        <h1 className="title">MooWee</h1>
+        <h1 className="title">MOOWEE</h1>
         <MovieAutoComplete
           onChange={this.handleQueryChange}
         />

@@ -2,19 +2,18 @@ import React, { PureComponent } from 'react'
 import { withRouter } from 'react-router-dom'
 import ApiManager from 'utils/ApiManager'
 import Debounce from 'utils/Debounce'
-import qs from 'query-string'
 import MovieSuggestion from '../MovieSuggestion/MovieSuggestion'
 import './MovieAutoComplete.css'
 
 class MovieAutoComplete extends PureComponent {
-  constructor(){
+  constructor () {
     super()
     this.state = {
       searchTerm: '',
-      suggestions: [],
+      suggestions: []
     }
   }
-  render(){
+  render () {
     const { searchTerm, suggestions } = this.state
     return (
       <div className="autocomplete">
@@ -27,7 +26,7 @@ class MovieAutoComplete extends PureComponent {
           {
             suggestions.map(suggestion => (
               <MovieSuggestion
-                key={suggestion.id}
+                key={`${suggestion.id}.${suggestion.title}`}
                 movie={suggestion}
                 viewMovie={this.viewMovie}
               />
@@ -39,13 +38,12 @@ class MovieAutoComplete extends PureComponent {
   }
   viewMovie = movie => {
     const { history } = this.props
-    const urlParams = qs.stringify({ title: movie.title })
-    history.push(`/movie?${urlParams}`)
+    history.push(`/movie/${movie.title}`)
   }
   onChange = ({ target: { value: searchTerm } }) => {
     const { onChange } = this.props
     this.setState({ searchTerm })
-    if(searchTerm.length > 1){
+    if (searchTerm.length > 1) {
       Debounce(() => this.getSuggestions(searchTerm), 250)()
     }
     onChange(searchTerm)

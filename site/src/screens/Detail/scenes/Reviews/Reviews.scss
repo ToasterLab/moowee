@@ -1,0 +1,28 @@
+@import "styles/Colors.scss";
+
+.reviews {
+  text-align: center;
+  .reviews-list{
+    margin-top: 10px;
+    text-align: left;
+    .review {
+      padding: 20px;
+      border-top: 1px solid $black-color;
+      cursor: pointer;
+      color: $black-color;
+      
+      .timestamp {
+        text-align:right;
+      }
+    }
+    .review:last-of-type{
+      border-bottom: 1px solid $black-color;
+    }
+    .review.positive {
+      background-color: $light-green-color;
+    }
+    .review.negative {
+      background-color: $light-red-color;
+    }
+  }
+}

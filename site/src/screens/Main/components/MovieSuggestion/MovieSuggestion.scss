@@ -7,7 +7,9 @@
   margin-bottom: 10px;
   cursor: pointer;
   img {
-    max-height: 100px;
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
   }
   .movie-info {
     padding: 20px;

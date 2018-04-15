@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import './MovieSuggestion.css'
 
 class MovieSuggestion extends PureComponent {
-  render() {
+  render () {
     const { movie } = this.props
     return (
       <div className="movie-suggestion" onClick={this.onClick}>
