@@ -63,8 +63,17 @@ const extractData = htmlResult => {
     result.review = jsonData.review.map(extractReview)
   }
 
+  if (jsonData.character && Array.isArray(jsonData.character)) {
+    result.character = jsonData.character
+  }
+
   if (jsonData.actors && Array.isArray(jsonData.actors)) {
-    result.actors = jsonData.actors.map(extractPerson)
+    result.actors = jsonData.actors.map(extractPerson).map((actor, index) => {
+      if (result.character && result.character[index]) {
+        return { ...actor, character: result.character[index] }
+      }
+      return actor
+    })
   }
 
   if (jsonData.director && Array.isArray(jsonData.director)) {
@@ -78,6 +87,21 @@ const extractData = htmlResult => {
   if (jsonData.genre) {
     result.genre = jsonData.genre
   }
+
+  result.releaseDate = $('.js-theater-release-dates>.meta-value>time').attr('datetime')
+
+  const metaValues = $('li.meta-row.clearfix')
+  metaValues.each((index, element) => {
+    const innerText = $(element).text()
+
+    if (innerText.indexOf('Runtime: ') >= 0) {
+      result.runTime = innerText.trim().substr(9).trim()
+    } else if (innerText.indexOf('Box Office: ') >= 0) {
+      result.boxOffice = innerText.trim().substr(12).trim()
+    } else if (innerText.indexOf('On Disc/Streaming: ') >= 0) {
+      result.dvdStreaming = innerText.trim().substr(19).trim()
+    }
+  })
 
   return result
 }

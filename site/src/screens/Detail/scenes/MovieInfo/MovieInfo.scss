@@ -1,11 +1,9 @@
 .movie-info {
   img {
     width: 100%;
+    margin-bottom: 20px;
   }
-  .rating,
-  .genres,
-  .directors,
-  .production-company {
+  .item-list {
     margin-top: 20px;
     margin-bottom: 20px;
   }

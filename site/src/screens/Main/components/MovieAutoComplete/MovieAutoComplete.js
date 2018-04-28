@@ -24,9 +24,9 @@ class MovieAutoComplete extends PureComponent {
         />
         <div className="suggestions">
           {
-            suggestions.map(suggestion => (
+            suggestions.map((suggestion, index) => (
               <MovieSuggestion
-                key={`${suggestion.id}.${suggestion.title}`}
+                key={`${index}${suggestion.id}.${suggestion.title}`}
                 movie={suggestion}
                 viewMovie={this.viewMovie}
               />

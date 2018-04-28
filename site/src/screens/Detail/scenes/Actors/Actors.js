@@ -10,7 +10,10 @@ class Actor extends PureComponent {
     return (
       <div className={classnames('actor', className)} onClick={this.viewActor}>
         <img src={actor.image || placeholderProfilePicture} alt={actor.name} />
-        <strong>{actor.name}</strong>
+        <strong>
+          {actor.name}
+          { actor.character ? ` (${actor.character})` : null}
+        </strong>
       </div>
     )
   }

@@ -40,6 +40,7 @@ class DetailScreen extends Component {
     return (
       <div className="detail-screen">
         <div className="header">
+          <NavLink to={`/`}>{'< '}BACK</NavLink>
           <h1 className="movie-title">{rt.title}</h1>
           <div className="tabs">
             <NavLink exact to={`${matchUrl}`} activeClassName="active">INFO</NavLink>

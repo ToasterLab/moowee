@@ -3,14 +3,14 @@ import classnames from 'classnames'
 import './ItemList.css'
 
 const ItemList = ({ items, label, className }) => items.length > 0 ? (
-  <div className={classnames('item', className)}>
+  <div className={classnames('item-list', className)}>
     <div className="left">
       <label><strong>{label}</strong></label>
     </div>
     <div className="right">
       {
         items.map((item, index) => (
-          <span key={item.name}>
+          <span key={`${item.name}${index}`}>
             {
               item.url ? (
                 <a href={item.url}>
@@ -18,7 +18,7 @@ const ItemList = ({ items, label, className }) => items.length > 0 ? (
                 </a>
               ) : item.name
             }
-            {index === items.length -1 ? '' : ', '}
+            {index === items.length - 1 ? '' : ', '}
           </span>
         ))
       }

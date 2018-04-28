@@ -30,6 +30,26 @@ const MovieInfo = ({ rt }) => (
       label="Produced By: "
       items={rt.productionCompany ? [ { name: rt.productionCompany } ] : []}
     />
+    <ItemList
+      className="runtime"
+      lable="Runtime: "
+      items={[ { name: rt.runTime } ]}
+    />
+    <ItemList
+      className="release-data"
+      label="Release Date: "
+      items={[ { name: rt.releaseDate } ]}
+    />
+    <ItemList
+      className="box-office"
+      label="Box Office: "
+      items={[ { name: rt.boxOffice } ]}
+    />
+    <ItemList
+      className="dvd-streaming"
+      label="DVD / Streaming: "
+      items={[ { name: rt.dvdStreaming } ]}
+    />
   </div>
 )
 

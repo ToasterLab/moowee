@@ -4,6 +4,10 @@
   height: 100vh;
   overflow: hidden;
   .header {
+    padding-top: 20px;
+    a {
+      text-decoration: none
+    }
     .movie-title {
       padding: 20px 20px 20px 20px;
       margin: 0;
@@ -17,7 +21,6 @@
 
       a {
         flex: 1;
-        text-decoration: none
       }
 
       a.active {
